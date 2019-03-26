@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanziting.dao.HelloDao">
+
+    <resultMap id="BaseResultMap" type="com.yanziting.model.DO.HelloDO">
+        <result column="keyword" property="keyword" />
+    </resultMap>
+
+    <parameterMap id="Hello" type="com.yanziting.model.DO.HelloDO"/>
+
+    <select id="getAllHello" resultMap="BaseResultMap" >
+        select keyword from hello
+    </select>
+
+    <insert id="createHello" parameterMap="Hello" >
+        insert into
+            hello(keyword)
+        values
+            (#{keyword})
+    </insert>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanziting.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.yanziting.model.DO.UserDO">
+        <result column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="pwd" property="pwd" />
+        <result column="registerTime" property="registerTime" />
+        <result column="lastLoginTime" property="lastLoginTime" />
+        <result column="loginIp" property="loginIp" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <parameterMap id="User" type="com.yanziting.model.DO.UserDO"/>
+
+    <select id="getUserByUsername" resultMap="BaseResultMap" parameterType="String" >
+        select * from `user`
+        where username=#{username}
+    </select>
+
+    <select id="getUserByEmail" resultMap="BaseResultMap" parameterType="String" >
+        select * from `user`
+        where email=#{email}
+    </select>
+
+    <insert id="insertUser" parameterMap="User" keyProperty="id" useGeneratedKeys="true" >
+        insert into
+            `user`(username,email,pwd,loginIp,status)
+        values
+            (#{username},#{email},#{pwd},#{loginIp},#{status})
+    </insert>
+
+</mapper>
