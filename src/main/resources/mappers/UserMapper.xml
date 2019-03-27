@@ -32,4 +32,10 @@
             (#{username},#{email},#{pwd},#{loginIp},#{status})
     </insert>
 
+    <select id="getUserByUsernameOrEmailAndPwd" resultMap="BaseResultMap" >
+        select * from `user`
+        where username=#{usernameOrEmail} or email=#{usernameOrEmail} and pwd=#{pwd}
+    </select>
+
+
 </mapper>
