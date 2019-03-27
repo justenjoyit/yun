@@ -6,6 +6,7 @@ import com.yanziting.model.DTO.UserDTO;
 import com.yanziting.model.DTO.UserLoginRequestDTO;
 import com.yanziting.model.DTO.UserRegisterRequestDTO;
 import com.yanziting.service.UserService;
+import com.yanziting.utils.EncryptUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -51,10 +52,13 @@ public class UserServiceImpl implements UserService {
             return "邮箱重复";
         }
 
+        //密码进行MD5加密
+        String pwd = EncryptUtils.md5(userRegisterRequestDTO.getPwd());
+
         userDao.insertUser(UserDO.builder()
                 .username(userRegisterRequestDTO.getUsername())
                 .email(userRegisterRequestDTO.getEmail())
-                .pwd(userRegisterRequestDTO.getPwd())
+                .pwd(pwd)
                 .loginIp("")
                 .status(0)
                 .build()
@@ -84,8 +88,15 @@ public class UserServiceImpl implements UserService {
         if (null == userLoginRequestDTO.getRememberMe()) {
             userLoginRequestDTO.setRememberMe(false);
         }
+<<<<<<< HEAD
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginRequestDTO.getUsernameOrEmail(), userLoginRequestDTO.getPwd());
+=======
+        //密码做MD5加密
+        String pwd = EncryptUtils.md5(userLoginRequestDTO.getPwd());
+        Subject currentUser = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginRequestDTO.getUsernameOrEmail(), pwd);
+>>>>>>> dev-yanziting-linux
 
         try {
             currentUser.login(usernamePasswordToken);

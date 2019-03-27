@@ -34,7 +34,11 @@
 
     <select id="getUserByUsernameOrEmailAndPwd" resultMap="BaseResultMap" >
         select * from `user`
+<<<<<<< HEAD
         where username=#{usernameOrEmail} or email=#{usernameOrEmail} and pwd=#{pwd}
+=======
+        where (username=#{usernameOrEmail} or email=#{usernameOrEmail}) and pwd=#{pwd}
+>>>>>>> dev-yanziting-linux
     </select>
 
 
