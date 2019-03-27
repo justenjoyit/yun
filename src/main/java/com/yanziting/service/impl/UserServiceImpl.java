@@ -88,15 +88,11 @@ public class UserServiceImpl implements UserService {
         if (null == userLoginRequestDTO.getRememberMe()) {
             userLoginRequestDTO.setRememberMe(false);
         }
-<<<<<<< HEAD
-        Subject currentUser = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginRequestDTO.getUsernameOrEmail(), userLoginRequestDTO.getPwd());
-=======
+
         //密码做MD5加密
         String pwd = EncryptUtils.md5(userLoginRequestDTO.getPwd());
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginRequestDTO.getUsernameOrEmail(), pwd);
->>>>>>> dev-yanziting-linux
 
         try {
             currentUser.login(usernamePasswordToken);
